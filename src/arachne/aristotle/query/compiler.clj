@@ -163,7 +163,7 @@
                     (BasicPattern/wrap (mapcat triples (rest args))))
     :reduced (OpReduced/create (op a1))
     :sequence (OpSequence/create (op a1) (op a2))
-    :slice (OpSlice. (op a1) (long a1) (long (first amore)))
+    :slice (OpSlice. (op a1) (long a2) (long (first amore)))
     :top-n (OpTopN. (op (first amore)) (long a1) (sort-conditions a2))
     :union (OpUnion. (op a1) (op a2))
     :service (throw (ex-info "SPARQL federated queries not yet supported" {}))
