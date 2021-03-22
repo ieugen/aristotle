@@ -8,7 +8,7 @@
            [java.util GregorianCalendar Calendar Date Map Collection List]
            [org.apache.jena.graph Node NodeFactory Triple GraphUtil Node_URI Node_Literal Node_Variable Node_Blank Factory Graph]
            [org.apache.jena.datatypes.xsd XSDDatatype XSDDateTime]
-           [javax.xml.bind DatatypeConverter]
+           [jakarta.xml.bind DatatypeConverter]
            [org.apache.jena.riot RDFDataMgr]
            [org.apache.jena.reasoner TriplePattern])
   (:refer-clojure :exclude [reify load]))
