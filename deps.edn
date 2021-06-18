@@ -1,6 +1,6 @@
 {:paths ["src"]
  :deps {org.clojure/clojure {:mvn/version "1.10.3"},
-        org.apache.jena/apache-jena-libs {:mvn/version "3.17.0", :extension "pom"}
+        org.apache.jena/apache-jena-libs {:mvn/version "4.1.0", :extension "pom"}
         jakarta.xml.bind/jakarta.xml.bind-api {:mvn/version "3.0.0"}}
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps {com.cognitect/test-runner {:git/url "https://github.com/cognitect-labs/test-runner.git"
