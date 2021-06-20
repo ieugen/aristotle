@@ -111,14 +111,14 @@
             (= type "TURTLE")        (RDFFormat/TURTLE)
             (= type "TURTLE_BLOCKS") (RDFFormat/TURTLE_BLOCKS)
             (= type "TURTLE_FLAT")   (RDFFormat/TURTLE_FLAT)
-            (= type "TURTLE_PRETTY") (RDFFormat/TURTLE_PRETTY))])
-  (with-open [o (io/output-stream
-                  (cond
-                    (string? file) file
-                    (uri? file) (str file)
-                    (instance? java.net.URL file) (str (.toURI ^URL file))
-                    (instance? java.io.File file) (-> ^File file
-                                                      (.getAbsoluteFile)
-                                                      (.toURI)
-                                                      (str))))]
-    (RDFDataMgr/write o graph (RDFFormat/TTL))))
+            (= type "TURTLE_PRETTY") (RDFFormat/TURTLE_PRETTY))]
+    (with-open [o (io/output-stream
+                    (cond
+                      (string? file) file
+                      (uri? file) (str file)
+                      (instance? java.net.URL file) (str (.toURI ^URL file))
+                      (instance? java.io.File file) (-> ^File file
+                                                        (.getAbsoluteFile)
+                                                        (.toURI)
+                                                        (str))))]
+      (RDFDataMgr/write o ^Graph graph ^RDFFormat t))))
