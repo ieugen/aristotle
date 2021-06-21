@@ -83,20 +83,15 @@
   - java.net.URL
   - java.io.File
   File types available:
-  ABBREV, BLOCKS, FLAT, NQ, NQUADS, NT, NTRIPLES, PLAIN, PRETTY, RDFJSON, RDFNULL,
-  RDFXML, RDFXML_ABBREV, RDFXML_PLAIN, RDFXML_PRETTY, TRIG, TRIG_BLOCKS, TRIG_FLAT,
+  NQ, NQUADS, NT, NTRIPLES, RDFJSON, RDFNULL, RDFXML, RDFXML_ABBREV,
+  RDFXML_PLAIN, RDFXML_PRETTY, TRIG, TRIG_BLOCKS, TRIG_FLAT,
   TRIG_PRETTY, TTL, TURTLE, TURTLE_BLOCKS, TURTLE_FLAT, TURTLE_PRETTY"
   [^Graph graph file type]
   (let [t (cond
-            (= type "ABBREV")        (RDFFormat/ABBREV)
-            (= type "BLOCKS")        (RDFFormat/BLOCKS)
-            (= type "FLAT")          (RDFFormat/FLAT)
             (= type "NQ")            (RDFFormat/NQ)
             (= type "NQUADS")        (RDFFormat/NQUADS)
             (= type "NT")            (RDFFormat/NT)
             (= type "NTRIPLES")      (RDFFormat/NTRIPLES)
-            (= type "PLAIN")         (RDFFormat/PLAIN)
-            (= type "PRETTY")        (RDFFormat/PRETTY)
             (= type "RDFJSON")       (RDFFormat/RDFJSON)
             (= type "RDFNULL")       (RDFFormat/RDFNULL)
             (= type "RDFXML")        (RDFFormat/RDFXML)
