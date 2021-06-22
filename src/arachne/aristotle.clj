@@ -75,6 +75,27 @@
                                                        (str))))
   graph)
 
+(def rdf-format
+  {:NQ              (RDFFormat/NQ)
+   :NQUADS          (RDFFormat/NQUADS)
+   :NT              (RDFFormat/NT)
+   :NTRIPLES        (RDFFormat/NTRIPLES)
+   :RDFJSON         (RDFFormat/RDFJSON)
+   :RDFNULL         (RDFFormat/RDFNULL)
+   :RDFXML          (RDFFormat/RDFXML)
+   :RDFXML_ABBREV   (RDFFormat/RDFXML_ABBREV)
+   :RDFXML_PLAIN    (RDFFormat/RDFXML_PLAIN)
+   :RDFXML_PRETTY   (RDFFormat/RDFXML_PRETTY)
+   :TRIG            (RDFFormat/TRIG)
+   :TRIG_BLOCKS     (RDFFormat/TRIG_BLOCKS)
+   :TRIG_FLAT       (RDFFormat/TRIG_FLAT)
+   :TRIG_PRETTY     (RDFFormat/TRIG_PRETTY)
+   :TTL             (RDFFormat/TTL)
+   :TURTLE          (RDFFormat/TURTLE)
+   :TURTLE_BLOCKS   (RDFFormat/TURTLE_BLOCKS)
+   :TURTLE_FLAT     (RDFFormat/TURTLE_FLAT)
+   :TURTLE_PRETTY   (RDFFormat/TURTLE_PRETTY)})
+
 (defn write
   "Serialize a graph and write to file.
   The file may be specified using:
@@ -86,27 +107,8 @@
   NQ, NQUADS, NT, NTRIPLES, RDFJSON, RDFNULL, RDFXML, RDFXML_ABBREV,
   RDFXML_PLAIN, RDFXML_PRETTY, TRIG, TRIG_BLOCKS, TRIG_FLAT,
   TRIG_PRETTY, TTL, TURTLE, TURTLE_BLOCKS, TURTLE_FLAT, TURTLE_PRETTY"
-  [^Graph graph file type]
-  (let [t (cond
-            (= type "NQ")            (RDFFormat/NQ)
-            (= type "NQUADS")        (RDFFormat/NQUADS)
-            (= type "NT")            (RDFFormat/NT)
-            (= type "NTRIPLES")      (RDFFormat/NTRIPLES)
-            (= type "RDFJSON")       (RDFFormat/RDFJSON)
-            (= type "RDFNULL")       (RDFFormat/RDFNULL)
-            (= type "RDFXML")        (RDFFormat/RDFXML)
-            (= type "RDFXML_ABBREV") (RDFFormat/RDFXML_ABBREV)
-            (= type "RDFXML_PLAIN")  (RDFFormat/RDFXML_PLAIN)
-            (= type "RDFXML_PRETTY") (RDFFormat/RDFXML_PRETTY)
-            (= type "TRIG")          (RDFFormat/TRIG)
-            (= type "TRIG_BLOCKS")   (RDFFormat/TRIG_BLOCKS)
-            (= type "TRIG_FLAT")     (RDFFormat/TRIG_FLAT)
-            (= type "TRIG_PRETTY")   (RDFFormat/TRIG_PRETTY)
-            (= type "TTL")           (RDFFormat/TTL)
-            (= type "TURTLE")        (RDFFormat/TURTLE)
-            (= type "TURTLE_BLOCKS") (RDFFormat/TURTLE_BLOCKS)
-            (= type "TURTLE_FLAT")   (RDFFormat/TURTLE_FLAT)
-            (= type "TURTLE_PRETTY") (RDFFormat/TURTLE_PRETTY))]
+  [^Graph graph file file-type]
+  (let [format (file-type rdf-format)]
     (with-open [o (io/output-stream
                     (cond
                       (string? file) file
@@ -116,4 +118,5 @@
                                                         (.getAbsoluteFile)
                                                         (.toURI)
                                                         (str))))]
-      (RDFDataMgr/write o ^Graph graph ^RDFFormat t))))
+      (RDFDataMgr/write o ^Graph graph ^RDFFormat format)
+      file)))

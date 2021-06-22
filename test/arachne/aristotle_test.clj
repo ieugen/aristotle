@@ -13,7 +13,7 @@
   (let [graph (aa/graph :simple)
         graph2 (aa/graph :simple)]
     (aa/read graph "./foaf.rdf")
-    (aa/write graph "./test/test.rdf" "RDFXML")
+    (aa/write graph "./test/test.rdf" :RDFXML)
     (aa/read graph2 "./test/test.rdf")
     (io/delete-file "./test/test.rdf")
     (is (IsoMatcher/isomorphic ^Graph graph ^Graph graph2))))
@@ -22,7 +22,7 @@
   (let [graph (aa/graph :simple)
         graph2 (aa/graph :simple)]
     (aa/read graph "./la_census.rdf")
-    (aa/write graph "./test/test.rdf" "RDFXML")
+    (aa/write graph "./test/test.rdf" :RDFXML)
     (aa/read graph2 "./test/test.rdf")
     (io/delete-file "./test/test.rdf")
     (is (IsoMatcher/isomorphic ^Graph graph ^Graph graph2))))
@@ -31,7 +31,7 @@
   (let [graph (aa/graph :simple)
         graph2 (aa/graph :simple)]
     (aa/read graph "./TheFirm.n3")
-    (aa/write graph "./test/test.rdf" "RDFXML")
+    (aa/write graph "./test/test.rdf" :RDFXML)
     (aa/read graph2 "./test/test.rdf")
     (io/delete-file "./test/test.rdf")
     (is (IsoMatcher/isomorphic ^Graph graph ^Graph graph2))))
