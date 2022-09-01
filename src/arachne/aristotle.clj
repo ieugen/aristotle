@@ -8,7 +8,7 @@
             [clojure.java.io :as io])
   (:import [org.apache.jena.reasoner.rulesys GenericRuleReasoner]
            [org.apache.jena.graph Factory Graph GraphUtil]
-           [org.apache.jena.riot RDFDataMgr]
+           [org.apache.jena.riot RDFDataMgr RDFFormat]
            [java.net URL]
            [java.io File])
   (:refer-clojure :exclude [read]))
@@ -75,4 +75,48 @@
                                                        (str))))
   graph)
 
+(def rdf-format
+  {:NQ              (RDFFormat/NQ)
+   :NQUADS          (RDFFormat/NQUADS)
+   :NT              (RDFFormat/NT)
+   :NTRIPLES        (RDFFormat/NTRIPLES)
+   :RDFJSON         (RDFFormat/RDFJSON)
+   :RDFNULL         (RDFFormat/RDFNULL)
+   :RDFXML          (RDFFormat/RDFXML)
+   :RDFXML_ABBREV   (RDFFormat/RDFXML_ABBREV)
+   :RDFXML_PLAIN    (RDFFormat/RDFXML_PLAIN)
+   :RDFXML_PRETTY   (RDFFormat/RDFXML_PRETTY)
+   :TRIG            (RDFFormat/TRIG)
+   :TRIG_BLOCKS     (RDFFormat/TRIG_BLOCKS)
+   :TRIG_FLAT       (RDFFormat/TRIG_FLAT)
+   :TRIG_PRETTY     (RDFFormat/TRIG_PRETTY)
+   :TTL             (RDFFormat/TTL)
+   :TURTLE          (RDFFormat/TURTLE)
+   :TURTLE_BLOCKS   (RDFFormat/TURTLE_BLOCKS)
+   :TURTLE_FLAT     (RDFFormat/TURTLE_FLAT)
+   :TURTLE_PRETTY   (RDFFormat/TURTLE_PRETTY)})
 
+(defn write
+  "Serialize a graph and write to file.
+  The file may be specified using:
+  - String URIs,
+  - java.net.URI,
+  - java.net.URL
+  - java.io.File
+  File types available:
+  NQ, NQUADS, NT, NTRIPLES, RDFJSON, RDFNULL, RDFXML, RDFXML_ABBREV,
+  RDFXML_PLAIN, RDFXML_PRETTY, TRIG, TRIG_BLOCKS, TRIG_FLAT,
+  TRIG_PRETTY, TTL, TURTLE, TURTLE_BLOCKS, TURTLE_FLAT, TURTLE_PRETTY"
+  [^Graph graph file file-type]
+  (let [format (file-type rdf-format)]
+    (with-open [o (io/output-stream
+                    (cond
+                      (string? file) file
+                      (uri? file) (str file)
+                      (instance? java.net.URL file) (str (.toURI ^URL file))
+                      (instance? java.io.File file) (-> ^File file
+                                                        (.getAbsoluteFile)
+                                                        (.toURI)
+                                                        (str))))]
+      (RDFDataMgr/write o ^Graph graph ^RDFFormat format)
+      file)))

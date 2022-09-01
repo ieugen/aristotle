@@ -156,7 +156,7 @@
   provided filter expressions. Equivalent to an OPTIONAL plus a filter
   expression in SPARQL."
   (s/cat :op #{:left-join} :left ::operation :right ::operation
-         :exprs (s/+ ::expr-list)))
+         :exprs (s/+ ::expr)))
 
 (defd ::list
   "View of a result set as a list. Usually redundant in Aristotle."
