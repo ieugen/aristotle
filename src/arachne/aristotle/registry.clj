@@ -2,8 +2,7 @@
   "Tools for mapping between IRIs and keywords"
   (:require [clojure.string :as str])
   (:refer-clojure :exclude [find alias])
-  (:import [org.apache.jena.rdf.model.impl Util]
-           [clojure.lang ExceptionInfo]))
+  (:import [clojure.lang ExceptionInfo]))
 
 ;; Note: it would potentially be more performant to use a trie or
 ;; prefix tree instead of a normal map for the inverse prefix

@@ -15,3 +15,7 @@ jena-docs
 .cpcache
 .rebl
 /.nrepl-history
+.lsp/.cache
+.calva/output-window/
+.clj-kondo/.cache
+.portal
